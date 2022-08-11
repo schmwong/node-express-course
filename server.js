@@ -12,6 +12,7 @@ const app = express();
 
 // Some mock data
 const mockUserData = [{ name: "Mark" }, { name: "Jill" }];
+
 app.get("/users", function (req, res) {
   res.json({
     success: true,
@@ -22,10 +23,14 @@ app.get("/users", function (req, res) {
 
 // starts up the server locally on the port given as its first argument (8000)
 app.listen(8000, function () {
-  console.log("server is running");
+  console.log("server is listening");
 });
 
 /*
 Test run in terminal: node server.js
 ctrl C to quit
+
+Open a browser and navigate to `http://localhost:8000/users`
+Should see this JSON file:
+{"success":true,"message":"successfully got users. Nice!","users":[{"name":"Mark"},{"name":"Jill"}]}
 */
