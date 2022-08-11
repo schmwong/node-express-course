@@ -10,6 +10,10 @@ const express = require("express");
 // creates an instance of the express constructor, which we will name "app"
 const app = express();
 
+// "body-parser" to make POST requests
+const bodyParser = require("body-parser");
+app.use(bodyParser.json());
+
 // Some mock data
 const mockUserData = [{ name: "Mark" }, { name: "Jill" }];
 
@@ -30,6 +34,29 @@ app.get("/users/:id", function (req, res) {
     message: "got one user",
     user: req.params.id,
   });
+});
+
+// function to handle a POST request made to the 'login' endpoint,
+// as if a user was trying to log in
+app.post("/login", function (req, res) {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  const mockUsername = "billyTheKid";
+  const mockPassword = "superSecret";
+
+  if (username === mockUsername && password === mockPassword) {
+    res.json({
+      success: true,
+      message: "password and username match!",
+      token: "encrypted token goes here",
+    });
+  } else {
+    res.json({
+      success: false,
+      message: "password and username do not match",
+    });
+  }
 });
 
 // starts up the server locally on the port given as its first argument (8000)
