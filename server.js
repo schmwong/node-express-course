@@ -21,6 +21,17 @@ app.get("/users", function (req, res) {
   });
 });
 
+// Words with a colon in front of them in the url are treated as variables
+// Access the value of each variable through req.params
+app.get("/users/:id", function (req, res) {
+  console.log(req.params.id);
+  res.json({
+    success: true,
+    message: "got one user",
+    user: req.params.id,
+  });
+});
+
 // starts up the server locally on the port given as its first argument (8000)
 app.listen(8000, function () {
   console.log("server is listening");
